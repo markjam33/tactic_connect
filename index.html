@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>TACTIC Connect</title>
+	<!-- stylesheet -->
+	<link rel="stylesheet" type="text/css" href="css/plugin.css">
+
+	<!-- DOM Interface -->
+	<script src="./lib/CSInterface.js"></script>
+
+	<!-- JQuery Node.js workaround -->
+	<script type="text/javascript">window.module = undefined</script>
+
+	<!-- JQuery -->
+	<script src="./lib/jquery.js"></script>
+
+	<!-- Handlebars.js -->
+	<script src="./lib/handlebars.js"></script>
+
+	<!-- Pull TACTIC libs from the server -->
+	<!-- TODO: This needs to be moved to a dynamic insertion and a config file at
+	some point, or the libraries need to be added to ./lib. -->
+	<script type="text/javascript" src=""></script>
+	<script type="text/javascript" src=""></script>
+	<script type="text/javascript" src=""></script>
+	<script type="text/javascript" src=""></script>
+
+	<!-- Extension scripts -->
+	<script src="./js/adobeDOMBridge.js"></script>
+	<script src="./js/adobeHelpers.js"></script>
+	<script src="./js/tacticIntegration.js"></script>
+	<script src="./js/app.js"></script>
+	<script type="text/javascript">
+	server = new TacticServerStub();
+	</script>
+</head>
+<body>
+	<div id="menubar" class="menubar">
+		<span id="searchbar">
+			<span id="search-wrapper" class="login"><input type="text" id="simplesearch" autocomplete="off" class="search-field"/></span>
+			<span id="search-btn-wrapper" class="login"><button id="simple-search-btn" name="simple-search-btn" class="search-button"></button></span>
+		</span>
+		<span id="menu-button" class="menu-button">
+		</span>
+	</div>
+	<div id="main-menu" class="menu" style="display:none;">
+		<ul>
+			<li id="checkin">Check In</li>
+			<li id="version">Version</li>
+			<li id="logout">Logout</li>
+		</ul>
+	</div>
+	<div id="dialog" class="dialog" style="display:none;">
+	</div>
+	<div id="results" class="container">
+	</div>
+	<script id="login_screen" type="x-handlebars-template">
+		<div id="login-form" class="form">
+			<h1>Login</h1>
+			<div class="form-item">
+			<label for="server">Server:</label>
+			<input type="text" id="server" autocomplete="off" />
+			</div>
+			<div class="form-item">
+			<label for="project">Project:</label>
+			<input type="text" id="project" autocomplete="off" />
+			</div>
+			<div class="form-item">
+			<label for="login">Login:</label>
+			<input type="text" id="login" autocomplete="off" />
+			</div>
+			<div class="form-item">
+			<label for="password">Password: </label>
+			<input type="password" id="password" autocomplete="off" />
+			</div>
+			<div class="buttons">
+			<button id="login-btn" name="login-btn">Login</button>
+			</div>
+		</div>
+	</script>
+	<script id="splash_screen" type="x-handlebars-template">
+	<div class="splash-screen-container">
+		<p class="splash-screen-text">Enter a search term above to begin your search</p>
+	</div>
+	</script>
+	<script id="asset_template" type="x-handlebars-template">
+	{{#if this}}
+	{{#each this}}
+	<div id="asset_{{ code }}" class="asset-container">
+		<div class="asset-thumb">
+			<img id="thumb_{{ code }}" class="thumb"/>
+		</div>
+		<div class="asset-metadata">
+			<h2>{{ name }}</h2>
+			<ul>
+				<li><strong>Keywords: </strong>{{ keywords }}</li>
+				<li><strong>Code: </strong>{{ code }}</li>
+				<li><strong>Last modified: </strong>{{ modified_date }}</li>
+			</ul>
+			<input type="hidden" value="{{ main }}" id="path_{{ code }}"/>
+		</div>
+		<div class="buttons">
+		</div>
+	</div>
+	{{/each}}
+	{{else}}
+	<div class="splash-screen-container">
+		<p class="splash-screen-text">No results found</p>
+	</div>
+	{{/if}}
+	</script>
+	<script id="metadata_form" type="x-handlebars-template">
+	<div id="metadata-form" class="form">
+		<div class="form-item">
+			<label for="asset-name">Name:</label>
+			<input id="asset-name" name="asset-name" autocomplete="off" />
+		</div>
+		<div class="form-item">
+			<label for="asset-type">Asset Type:</label>
+			<select id="asset-type">
+	{{#each this }}
+				<option value="{{ code }}">{{ name }}</option>
+	{{/each}}
+			</select>
+		</div>
+		<div class="form-item">
+			<label for="asset-deliverable">Attach to Deliverable:</label>
+			<input id="asset-deliverable" name="asset-deliverable" autocomplete="off" />
+		</div>
+		<div id="deliverables" style="display:none;"></div>
+		<div class="form-item">
+			<label for="asset-keywords">Keywords:</label>
+			<input id="asset-keywords" name="asset-keywords" autocomplete="off" />
+		</div>
+		<div class="form-item">
+			<label for="asset-description">Description:</label>
+			<textarea id="asset-description" name="asset-description"></textarea>
+		</div>
+		<div class="form-item">
+			<label for="asset-use-restrictions">Use Restrictions:</label>
+			<textarea id="asset-use-restrictions" name="asset-use-restrictions"></textarea>
+		</div>
+		<div class="form-buttons">
+			<button id="cancel-btn">Cancel</button>
+			<button id="create-btn">Create</button>
+		</div>
+	</div>
+	</script>
+	<script id="deliverable_container" type="x-handlebars-template">
+	{{#each this}}
+		<div class="deliverable" id="{{ code }}">
+			<span class="deliverable">{{ code }}: {{ name }} | {{ pipeline_code }}</span>
+		</div>
+	{{/each}}
+	</script>
+</body>
+</html>

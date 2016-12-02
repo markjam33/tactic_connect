@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<ExtensionManifest Version="5.0" ExtensionBundleId="com.MarkMyers.TacticConnect" ExtensionBundleVersion="1.0.0" ExtensionBundleName="TacticConnect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ExtensionList>
+		<Extension Id="com.MarkMyers.TacticConnect.extension" Version="1.0" />
+	</ExtensionList>
+
+	<ExecutionEnvironment>
+		<HostList>
+			<Host Name="AEFT" Version="[13.0,14.9]" />
+			<Host Name="ILST" Version="[17.0,20.9]" />
+			<Host Name="PHXS" Version="15.0" />
+			<Host Name="PHSP" Version="15.0" />
+		</HostList>
+		<LocaleList>
+			<Locale Code="All" />
+		</LocaleList>
+		<RequiredRuntimeList>
+			<RequiredRuntime Name="CSXS" Version="5.0" />
+		</RequiredRuntimeList>
+	</ExecutionEnvironment>
+
+	<DispatchInfoList>
+		<Extension Id="com.MarkMyers.TacticConnect.extension">
+			<DispatchInfo>
+				<Resources>
+					<MainPath>./index.html</MainPath>
+					<ScriptPath>./jsx/AdobeDOM.jsx</ScriptPath>
+				</Resources>
+				<Lifecycle>
+					<AutoVisible>true</AutoVisible>
+				</Lifecycle>
+				<UI>
+					<Type>Panel</Type>
+					<Menu>TACTIC Connect</Menu>
+					<Geometry>
+						<Size>
+							<Height>100</Height>
+							<Width>250</Width>
+						</Size>
+						<MaxSize>
+							<Height>500</Height>
+							<Width>500</Width>
+						</MaxSize>
+						<MinSize>
+							<Height>100</Height>
+							<Width>250</Width>
+						</MinSize>
+					</Geometry>
+				</UI>
+			</DispatchInfo>
+		</Extension>
+	</DispatchInfoList>
+</ExtensionManifest>

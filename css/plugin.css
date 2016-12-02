@@ -1,0 +1,348 @@
+/* Copyright (c) 2015 Mark J. Myers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+* {
+	font-family: Arial,Lucida,Verdana,sans-serif;
+	font-size: x-small;
+}
+
+h1 {
+	font-size: small;
+}
+
+body {
+	margin: 0px;
+	min-width: 400px;
+}
+
+.menubar {
+	color: #dddddd;
+	background-color: #000000;
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.menu-button {
+	float: right;
+	z-index: 2000;
+	background: url(../images/menu-button.png) no-repeat;
+	background-size: 15px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 15px;
+	height: 15px;
+	border: none;
+	margin-right: 20px;
+}
+
+.menu-button:hover {
+	background:url(../images/menu-button-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.menu {
+	background: #000000;
+	border: none;
+	color: #aaaaaa;
+	float: right;
+	clear: both;
+	position: fixed;
+	right: -100px;
+	margin-right: 0px;
+	margin-top: 30px;
+	z-index: 5000;
+	width: 100px;
+	height: 100%;
+}
+
+.menu ul {
+	list-style: none;
+	line-height: 25px;
+	text-indent: -20px;
+}
+
+.menu li {
+	font-size: medium;
+}
+
+.menu li:hover {
+	color: #fff;
+}
+
+.dialog {
+	width: 300px;
+	height: 100%;
+	z-index: 3000;
+	float: right;
+	clear: both;
+	position: fixed;
+	right: -300px;
+	margin-right: 0px;
+	margin-top: 37px;
+	border-left: 1px solid #555555;
+	background-color: #ffffff;
+}
+
+#deliverables {
+	width: 220px;
+	margin-left: 30px;
+	max-height: 150px;
+	overflow: scroll;
+	border: 1px solid #555555;
+}
+
+.deliverable {
+	width: 500px;
+	padding: 5px;
+	border-bottom: 1px solid #999999;
+}
+
+.deliverable:hover {
+	background-color: #cceeff;
+}
+
+.container {
+	padding-top: 40px;
+}
+
+.search-field {
+	width: 250px;
+}
+
+.form {
+	color: #444444;
+	width: 280px;
+	height: 160px;
+	margin: auto;
+	margin-top: 20px;
+	padding: 10px;
+}
+
+.form h1 {
+	text-align: center;
+}
+
+.form-item label {
+	width: 80px;
+	display: inline-block;
+	text-align: right;
+}
+
+.form-item input {
+	width:150px;
+	display: inline-block;
+	margin: 5px;
+	border: 1px solid #bbbbbb;
+}
+
+.form-item select {
+	width: 150px;
+	margin: 5px;
+	font-family: Arial,Lucida,Verdana,sans-serif;
+}
+
+.form-item textarea {
+	width: 148px;
+	height: 40px;
+	display: inline;
+	vertical-align: top;
+	margin: 5px;
+}
+
+.form-buttons {
+	width: 205px;
+	text-align: right;
+	margin: auto;
+	margin-top: 10px;
+}
+
+
+.splash-screen-container {
+	margin: auto;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 10px;
+}
+
+.splash-screen-text {
+	color: #cccccc;
+	font-size: medium;
+}
+
+.asset-container {
+	color: #444444;
+	border-bottom: 1px solid #bbbbbb;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	overflow-y: hidden;
+}
+
+.asset-container:hover {
+	background-color: #cceeff;
+}
+
+.asset-contents {
+	min-width: 350px;
+	overflow: hidden;
+}
+
+.asset-thumb {
+	display: inline-block;
+	vertical-align: top;
+	padding: 3px;
+}
+
+.asset-thumb img {
+	border: 1px solid #555555;
+	width: 100px;
+	height: 57px;
+}
+
+.asset-metadata {
+	display: inline-block;
+	max-width: 250px;
+	overflow-x: hidden;
+	overflow-y: hidden:;
+}
+
+.buttons {
+	width: 15px;
+	float: right;
+	z-index: 1000;
+	clear: both;
+	padding-left: 15px;
+	padding-right: 15px;
+	display: inline-block;
+}
+
+.add-button {
+	background: url(../images/add.png) no-repeat;
+	background-size: 15px;
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.add-button:hover {
+	background: url(../images/add-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.footage-button {
+	background: url(../images/add.png) no-repeat;
+	background-size: 15px;
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.footage-button:hover {
+	background: url(../images/add-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.comp-button {
+	background: url(../images/add-comp.png) no-repeat;
+	background-size: 15px;
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.comp-button:hover {
+	background: url(../images/add-comp-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.layer-button {
+	background: url(../images/add-layer.png) no-repeat;
+	background-size: 15px;
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.layer-button:hover {
+	background: url(../images/add-layer-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.project-button {
+	background: url(../images/add-project.png) no-repeat;
+	background-size: 15px;
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.project-button:hover {
+	background: url(../images/add-project-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.open-button {
+	background: url(../images/open.png) no-repeat;
+	background-size: 15px;
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.open-button:hover {
+	background: url(../images/open-over.png) no-repeat;
+	background-size: 15px;
+}
+
+.search-button {
+	background: url(../images/search.png) no-repeat;
+	background-size: 15px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.search-button:hover {
+	background:url(../images/search-over.png) no-repeat;
+	background-size: 15px;
+}
