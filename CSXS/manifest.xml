@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<ExtensionManifest Version="5.0" ExtensionBundleId="com.MarkMyers.TacticConnect" ExtensionBundleVersion="1.0.0" ExtensionBundleName="TacticConnect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest Version="5.0" ExtensionBundleId="com.moverocket.TacticConnect" ExtensionBundleVersion="1.0.0" ExtensionBundleName="TacticConnect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="com.MarkMyers.TacticConnect.extension" Version="1.0" />
+		<Extension Id="com.moverocket.TacticConnect.extension" Version="1.0" />
 	</ExtensionList>
 
 	<ExecutionEnvironment>
@@ -21,7 +21,7 @@
 	</ExecutionEnvironment>
 
 	<DispatchInfoList>
-		<Extension Id="com.MarkMyers.TacticConnect.extension">
+		<Extension Id="com.moverocket.TacticConnect.extension">
 			<DispatchInfo>
 				<Resources>
 					<MainPath>./index.html</MainPath>
