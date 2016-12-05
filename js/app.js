@@ -1,16 +1,36 @@
+/* Copyright (c) 2015 Mark J. Myers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 $(document).ready(function() {
-	
+
 	function loadLoginScreen(p) {
 		var loginScreenScript = $("#login_screen").html();
 		var loginScreenTemplate = Handlebars.compile(loginScreenScript);
 		$("div#results").html(loginScreenTemplate(null));
-		
+
 		if (p != {}) {
 			$("input#server").val(p.server);
 			$("input#project").val(p.project);
 			$("input#login").val(p.login);
 		}
-		
+
 		$("button#login-btn").click(function() {
 			prefs = {
 				server: $("input#server").val(),
@@ -29,26 +49,26 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
+
 	function loadSplashScreen() {
 		var splashScreenScript = $("#splash_screen").html();
 		var splashScreenTemplate = Handlebars.compile(splashScreenScript);
 		$("div#results").html(splashScreenTemplate(null));
-		
+
 		$("button#simple-search-btn").click(function() {
 			if (server.get_login_ticket != "") {
 				var keywords = $("input#simplesearch").val();
 				var assets = new TacticKeywordAssetSearch(server, keywords);
 			}
 		});
-		
+
 		$("input#simplesearch").keypress(function(event) {
 			if (event.keyCode == 13) {
 				$("button#simple-search-btn").click();
 			}
 		});
 	}
-	
+
 	function loadPreferences(p) {
 		if ((p.ticket != '') && (typeof(p.ticket) != 'undefined')) {
 			server = new TacticServerConnection(p.server, p.project, p.login, p.ticket, '');
@@ -60,25 +80,25 @@ $(document).ready(function() {
 			loadLoginScreen(p);
 		}
 	}
-	
+
 	var prefs = new TacticPreferences().load(); // Define this class in tacticIntegration.js
 	loadPreferences(prefs);
-	
+
 	$(document).on("searchResultsLoadedEvent", function(event, obj) {
 		var assetTemplateScript = $("#asset_template").html();
 		var assetTemplate = Handlebars.compile(assetTemplateScript);
 		$("div#results").html(assetTemplate(obj.assets));
 		$(document).trigger("loadAssetInformation");
 	});
-	
+
 	$(window).scroll(function() {
 		$(document).trigger("loadAssetInformation");
 	});
-	
+
 	$(window).resize(function() {
 		$(document).trigger("loadAssetInformation");
 	});
-	
+
 	function isShowing(img) {
 		var viewport = {};
 		viewport.top = $(window).scrollTop();
@@ -88,7 +108,7 @@ $(document).ready(function() {
 		bounds.bottom = bounds.top + img.outerHeight();
 		return ((bounds.top <= viewport.bottom) && (bounds.bottom >= viewport.top));
 	}
-	
+
 	function assetButtons(asset) {
 		var buttons = "";
 		if (asset.openTypes.PLACE) {
@@ -109,7 +129,7 @@ $(document).ready(function() {
 		}
 		return buttons;
 	}
-	
+
 	function clickAddButton(button_class, file) {
 		if (button_class === "add") {
 			AdobeDOMBridge.importFile(file);
@@ -124,10 +144,10 @@ $(document).ready(function() {
 		} else if (button_class === "open") {
 			AdobeDOMBridge.openFile(file);
 		} else if (button_class === "template") {
-			
+
 		}
 	}
-	
+
 	// Handler for loading images and info
 	$(document).on("loadAssetInformation", function() {
 		// Load images
@@ -137,13 +157,13 @@ $(document).ready(function() {
 				if (! this.src) {
 					var asset_id = this.id.replace("thumb_" ,'');
 					var details = new AssetDetails(server, asset_id);
-					
+
 					// Insert thumbnail into HTMl
 					$(this).attr("src", details.icon);
 					$("input#path_"+asset_id).val(details.main);
 					var buttons = assetButtons(details);
 					$("div#asset_"+asset_id).children("div.buttons").html(buttons);
-					
+
 					$("div#asset_"+asset_id).children("div.buttons").children("button").each(function() {
 						var ev = $._data(this, 'events');
 						var button = this;
@@ -158,11 +178,11 @@ $(document).ready(function() {
 				}
 			}
 		});
-		
+
 	});
-	
+
 	// Menu handlers
-	
+
 	function toggleMenu() {
 		if ($("div#main-menu").is(':visible')) {
 			$("div#main-menu").animate(
@@ -181,7 +201,7 @@ $(document).ready(function() {
 			});
 		}
 	}
-	
+
 	function toggleDialog() {
 		if ($("div#dialog").is(':visible')) {
 			$("div#dialog").animate(
@@ -195,13 +215,13 @@ $(document).ready(function() {
 		} else {
 			$("div#dialog").show().animate({right: 0}, 200, "swing", function() {
 				$("input#asset-name").focus();
-				
+
 				$("input#asset-name").keypress(function(event) {
 					if (event.keyCode == 13) {
 						$("select#asset-type").focus();
 					}
 				});
-				
+
 				$("input#asset-deliverable").keypress(function(e) {
 					var text = $(this).val();
 					var re = /^order\d+/i;
@@ -217,7 +237,7 @@ $(document).ready(function() {
 									var delScript = $("#deliverable_container").html();
 									var delTemp = Handlebars.compile(delScript);
 									$("div#deliverables").html(delTemp(deliverables));
-									
+
 									$(".deliverable").click(function() {
 										$("input#asset-deliverable").val(this.id);
 										$("div#deliverables").hide();
@@ -231,40 +251,40 @@ $(document).ready(function() {
 						}
 					}
 				});
-				
+
 				$("input#asset-keywords").keypress(function(event) {
 					if (event.keyCode == 13) {
 						$("input#asset-description").focus();
 					}
 				});
-				
+
 				$("input#asset-description").keypress(function(event) {
 					if (event.keyCode == 13) {
 						$("input#asset-use-restrictions").focus();
 					}
 				});
-				
+
 				$("input#asset-use-restrictions").keypress(function(event) {
 					if (event.keyCode == 13) {
 						$("button#create-btn").focus();
 					}
 				});
-				
+
 			});
 		}
 	}
-	
+
 	$("span#menu-button").click(function() {
 		// Toggle menu visibility
 		toggleMenu();
 	});
-	
+
 	$(document).on("formLoadedEvent", function(event, obj) {
 		AdobeDOMBridge.getActiveFilename(function(res) {
 			$("input#asset-name").val(res);
 		}.bind(this));
 	});
-	
+
 	$("li#checkin").click(function() {
 		toggleMenu();
 		var assetTypes = new TacticAssetTypes(server);
@@ -272,11 +292,11 @@ $(document).ready(function() {
 		var metadataFormTemplate = Handlebars.compile(metadataFormScript);
 		$("div#dialog").html(metadataFormTemplate(assetTypes)).trigger("formLoadedEvent");
 		toggleDialog();
-		
+
 		$("button#cancel-btn").click(function() {
 			toggleDialog();
 		});
-		
+
 		$("button#create-btn").click(function() {
 			var data = {};
 			data.login = prefs.login;
@@ -290,12 +310,12 @@ $(document).ready(function() {
 			toggleMenu();
 		});
 	});
-	
+
 	$("li#version").click(function() {
 		var result = new TacticAssetVersion(server);
 		toggleMenu();
 	});
-	
+
 	$("li#logout").click(function() {
 		prefs.ticket = '';
 		var p = new TacticPreferences();
@@ -303,5 +323,5 @@ $(document).ready(function() {
 		toggleMenu();
 		loadPreferences(prefs);
 	});
-	
+
 });
